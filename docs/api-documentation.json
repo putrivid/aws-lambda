@@ -1,0 +1,61 @@
+{
+    "apiName": "Vaccine Registration API",
+    "description": "API untuk registrasi vaksin, termasuk penanganan CORS.",
+    "endpoints": [
+      {
+        "path": "/prod/",
+        "methods": [
+          {
+            "method": "OPTIONS",
+            "description": "Preflight request untuk mendukung CORS.",
+            "integration": "Mock Integration",
+            "responses": {
+              "200": {
+                "description": "Preflight request berhasil.",
+                "headers": {
+                  "Access-Control-Allow-Origin": "*",
+                  "Access-Control-Allow-Methods": "OPTIONS, POST",
+                  "Access-Control-Allow-Headers": "Content-Type"
+                }
+              }
+            }
+          },
+          {
+            "method": "POST",
+            "description": "Endpoint untuk registrasi vaksin.",
+            "integration": "AWS Lambda",
+            "lambdaFunction": "vaccine-registration-handler",
+            "responses": {
+              "200": {
+                "description": "Registrasi berhasil.",
+                "headers": {
+                  "Access-Control-Allow-Origin": "*",
+                  "Access-Control-Allow-Methods": "POST, OPTIONS",
+                  "Access-Control-Allow-Headers": "Content-Type"
+                }
+              },
+              "500": {
+                "description": "Terjadi kesalahan internal.",
+                "headers": {
+                  "Access-Control-Allow-Origin": "*",
+                  "Access-Control-Allow-Methods": "POST, OPTIONS",
+                  "Access-Control-Allow-Headers": "Content-Type"
+                }
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "corsConfiguration": {
+      "enabled": true,
+      "allowOrigins": ["*"],
+      "allowMethods": ["POST", "OPTIONS"],
+      "allowHeaders": ["Content-Type"]
+    },
+    "deployment": {
+      "stage": "prod",
+      "url": "https://kp8hnrlx80.execute-api.ap-southeast-2.amazonaws.com/prod/"
+    }
+  }
+  
