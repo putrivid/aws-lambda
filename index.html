@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    </head>
+    <header>
+        <h1>Fishcology Vaccine Registration</h1>
+    </header>
+    <body>
+        <div id="form">
+            <div class="fish" id="fish"></div>
+            <div class="fish" id="fish2"></div>
+            <div id="waterform">
+                <form id="registrationForm">
+                    <div class="formgroup" id="name-form">
+                        <label for="name">Your fish name</label>
+                        <input type="text" id="fname" name="fname" />
+                    </div>
+                    
+                    <div class="formgroup" id="fishid-form">
+                        <label for="fishid">Your fish ID</label>
+                        <input type="text" id="fishid" name="fishid" />
+                    </div>
+                    
+                    <div class="formgroup" id="date-form">
+                        <label for="vaccinedate">Your fish vaccination date</label>
+                        <input type="date" id="vaccinedate" name="vaccinedate" />
+                    </div>
+                    
+                    <input type="submit" value="Register!" />
+                </form>
+            </div>
+        </div>
+
+        <script>
+            // Define the callAPI function that sends data to Lambda
+            var callAPI = (event) => {
+                event.preventDefault(); // Prevent default form submission
+
+                var fname = document.getElementById('fname').value;
+                var fishId = document.getElementById('fishid').value;
+                var vaccDt = document.getElementById('vaccinedate').value;
+
+                // Validate input
+                if (!fname || !fishId || !vaccDt) {
+                    alert("All fields are required!");
+                    return;
+                }
+
+                var json = JSON.stringify({
+                    "name": fname,
+                    "fishId": fishId,
+                    "vaccineDate": vaccDt
+                });
+
+                $.ajax({
+    url: "http://localhost:5000/api", // Replace with your API Gateway endpoint
+    type: "POST",
+    contentType: "application/json",
+    data: json,
+    success: function(response) {
+        alert("Registration successful!");
+        window.location.replace("success.html"); // Redirect to success page
+    },
+    error: function(xhr, status, error) {
+        alert("Error: " + xhr.responseText);
+    }
+});
+
+            };
+
+            // Attach event listener to the form
+            document.getElementById('registrationForm').addEventListener('submit', callAPI);
+        </script>
+    </body>
+</html>

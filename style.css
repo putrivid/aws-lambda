@@ -1,0 +1,110 @@
+/* Global styles */
+body {
+    font-family: Arial, sans-serif;
+    background: #cce7ff; /* Warna biru muda menyerupai air */
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+header {
+    text-align: center;
+    background-color: #0099cc;
+    color: white;
+    padding: 20px 0;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5em;
+}
+
+/* Form container */
+#form {
+    width: 90%;
+    max-width: 500px;
+    margin: 50px auto;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.formgroup {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+input[type="text"], 
+input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1em;
+}
+
+input[type="submit"] {
+    background: #0099cc;
+    color: white;
+    border: none;
+    padding: 12px;
+    width: 100%;
+    font-size: 1.1em;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background: #007ba7;
+}
+
+/* Fish decoration */
+.fish {
+    position: absolute;
+    background: #007ba7;
+    width: 40px;
+    height: 20px;
+    border-radius: 10px;
+    animation: swim 5s infinite ease-in-out;
+}
+
+#fish {
+    top: 30px;
+    left: 10%;
+    animation-delay: 0s;
+}
+
+#fish2 {
+    top: 70px;
+    left: 70%;
+    animation-delay: 2.5s;
+}
+
+/* Water effect */
+#waterforn {
+    background: #cce7ff;
+    border-radius: 8px;
+    overflow: hidden;
+    padding: 20px;
+}
+
+/* Animation */
+@keyframes swim {
+    0% {
+        transform: translateX(0) scaleX(1);
+    }
+    50% {
+        transform: translateX(100px) scaleX(1.2);
+    }
+    100% {
+        transform: translateX(0) scaleX(1);
+    }
+}
